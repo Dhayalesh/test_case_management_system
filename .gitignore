@@ -1,0 +1,55 @@
+# -------------------------------
+# Frontend (Next.js)
+# -------------------------------
+
+/frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/dist/
+
+# Tailwind CSS cache
+frontend/.tailwind-cache/
+
+# Frontend environment files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# -------------------------------
+# Backend (Node.js + Express)
+# -------------------------------
+
+/backend/node_modules/
+backend/dist/
+backend/build/
+
+# Backend environment files
+backend/.env
+backend/.env.local
+backend/.env.development.local
+backend/.env.test.local
+backend/.env.production.local
+
+# -------------------------------
+# Common
+# -------------------------------
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.swp
+
+# Certificates/keys
+*.pem
