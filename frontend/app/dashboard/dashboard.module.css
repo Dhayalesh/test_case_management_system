@@ -1,0 +1,143 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #adf4de, #ffffff);
+  padding: 2rem 1rem;
+}
+
+.title {
+  font-size: 2.75rem;
+  color: #166534;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.buttonRow button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.testCases {
+  background-color: #22c55e; /* green-500 */
+}
+
+.testResults {
+  background-color: #3b82f6; /* blue-500 */
+}
+
+.settings {
+  background-color: #1e3a8a; /* dark blue-900 */
+}
+
+.logout {
+  background-color: #dc2626; /* red-600 */
+}
+
+.buttonRow button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.chartPlaceholder {
+  background: white;
+  margin: 0 auto 2rem auto;
+  padding: 1rem;
+  max-width: 600px;
+  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.chartWrapper {
+  background: white;
+  margin: 0 auto 2rem auto;
+  padding: 1.25rem;
+  max-width: 800px;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.chartTitle {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #14532d;
+}
+
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem 1.75rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #14532d;
+  box-shadow: 0 10px 20px rgba(22, 83, 45, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px rgba(22, 83, 45, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .buttonRow button {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .chartPlaceholder {
+    padding: 0.75rem;
+  }
+
+  .card {
+    font-size: 1.1rem;
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .buttonRow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttonRow button {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .card {
+    font-size: 1rem;
+  }
+}
