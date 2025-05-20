@@ -32,11 +32,15 @@
 }
 
 .testCases {
-  background-color: #22c55e; /* green-500 */
+  background-color: #3b82f6; /* green-500 */
+}
+
+.runTestCase {
+  background-color: #ffbb00; /* blue-500 */
 }
 
 .testResults {
-  background-color: #3b82f6; /* blue-500 */
+  background-color: #22c55e; /* blue-500 */
 }
 
 .settings {
