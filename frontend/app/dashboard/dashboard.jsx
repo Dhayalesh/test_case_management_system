@@ -36,7 +36,7 @@ const router = useRouter();
         <button className={styles.testCases} onClick={() => router.push('/test-case-groups')}>Test Cases</button>
         <button className={styles.runTestCase} onClick={() => router.push('/run-test-cases')}>Run Test Case</button>
         <button className={styles.testResults}>Test Results</button>
-        <button className={styles.settings}>Settings</button>
+        <button className={styles.settings} onClick={() => router.push('/settings')}>Settings</button>
         <button className={styles.logout} onClick={handleLogout}>
           Logout
         </button>
