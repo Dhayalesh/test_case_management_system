@@ -40,6 +40,7 @@
   border: 2px solid #d1d5db;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  color: black;
 }
 
 .input:focus {
@@ -47,7 +48,9 @@
   outline: none;
   box-shadow: 0 0 8px #3b82f6aa;
 }
-
+.input::placeholder {
+  color: grey;
+}
 .btn {
   background-color: #3b82f6;
   color: white;
