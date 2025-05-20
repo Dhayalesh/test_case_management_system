@@ -13,12 +13,7 @@ import {
 } from "recharts";
 
 export default function Dashboard() {
-  const testCases = [
-    { id: 1, title: "Login Functionality" },
-    { id: 2, title: "Signup Flow" },
-    { id: 3, title: "Payment Gateway" },
-  ];
-
+  
   const chartData = [
     { date: "May 15", pass: 10, fail: 2 },
     { date: "May 16", pass: 12, fail: 1 },
@@ -39,6 +34,7 @@ const router = useRouter();
 
       <div className={styles.buttonRow}>
         <button className={styles.testCases}onClick={() => router.push('/test-case-groups')}>Test Cases</button>
+        <button className={styles.runTestCase}>Run Test Case</button>
         <button className={styles.testResults}>Test Results</button>
         <button className={styles.settings}>Settings</button>
         <button className={styles.logout} onClick={handleLogout}>
@@ -59,14 +55,6 @@ const router = useRouter();
             <Line type="monotone" dataKey="fail" stroke="#ef4444" name="Failed" />
           </LineChart>
         </ResponsiveContainer>
-      </div>
-
-      <div className={styles.grid}>
-        {testCases.map((testCase) => (
-          <div key={testCase.id} className={styles.card}>
-            {testCase.title}
-          </div>
-        ))}
       </div>
     </div>
   );
