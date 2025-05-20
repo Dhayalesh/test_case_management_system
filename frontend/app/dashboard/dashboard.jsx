@@ -33,8 +33,8 @@ const router = useRouter();
       <h1 className={styles.title}>Test Case Management System</h1>
 
       <div className={styles.buttonRow}>
-        <button className={styles.testCases}onClick={() => router.push('/test-case-groups')}>Test Cases</button>
-        <button className={styles.runTestCase}>Run Test Case</button>
+        <button className={styles.testCases} onClick={() => router.push('/test-case-groups')}>Test Cases</button>
+        <button className={styles.runTestCase} onClick={() => router.push('/run-test-cases')}>Run Test Case</button>
         <button className={styles.testResults}>Test Results</button>
         <button className={styles.settings}>Settings</button>
         <button className={styles.logout} onClick={handleLogout}>
