@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,18 +17,34 @@ export default function Login() {
     }
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email && !password) {
       setError("Please fill email and password!");
+      return;
     } else if (!email) {
       setError("Please enter your email!");
+      return;
     } else if (!password) {
       setError("Please enter your password!");
-    } else if (email === "admin@ktern.com" && password === "admin123") {
-      localStorage.setItem("loggedIn", "true");
-      router.replace("/dashboard");
-    } else {
-      setError("Invalid email or password!");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://51.20.12.147/login", {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        localStorage.setItem("loggedIn", "true");
+        router.replace("/dashboard");
+      }
+    } catch (err) {
+      if (err.response?.status === 401) {
+        setError("Invalid email or password!");
+      } else {
+        setError("Server error. Please try again later.");
+      }
     }
   };
 
