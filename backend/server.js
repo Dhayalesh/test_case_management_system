@@ -9,9 +9,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const authRoutes = require("./routes/authRoutes");
-app.use("/api/auth", authRoutes);
+app.use("/", authRoutes);  // POST /login
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`✅ Server is running at http://localhost:${PORT}`);
 });
-
