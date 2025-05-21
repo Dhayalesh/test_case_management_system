@@ -30,7 +30,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("http://51.20.12.147/login", {
         email,
         password,
       });
