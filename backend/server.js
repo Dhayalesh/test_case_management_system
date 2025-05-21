@@ -11,6 +11,6 @@ app.use(bodyParser.json());
 const authRoutes = require("./routes/authRoutes");
 app.use("/", authRoutes);  // POST /login
 
-app.listen(PORT, () => {
-  console.log(`✅ Server is running at http://localhost:${PORT}`);
+app.listen(5000, "0.0.0.0", () => {
+  console.log(`✅ Server is running at http://localhost:5000`);
 });
