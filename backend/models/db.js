@@ -7,7 +7,6 @@ const db = mysql.createConnection({
   multipleStatements: true, 
 });
 
-
 db.connect((err) => {
   if (err) {
     console.error("DB connection error:", err);
@@ -35,7 +34,7 @@ db.connect((err) => {
       `;
       db.query(createUsersTable, (err) => {
         if (err) throw err;
-        console.log("Table created");
+        console.log("Table created: users");
 
         // Insert default admin user if not exists
         const insertAdminUser = `
@@ -45,6 +44,20 @@ db.connect((err) => {
         db.query(insertAdminUser, (err) => {
           if (err) throw err;
           console.log("Default admin user ensured");
+
+          // Create test_groups table
+          const createTestGroupsTable = `
+            CREATE TABLE IF NOT EXISTS test_groups (
+              id INT PRIMARY KEY AUTO_INCREMENT,
+              name VARCHAR(100) UNIQUE,
+              description TEXT,
+              date_added DATE
+            )
+          `;
+          db.query(createTestGroupsTable, (err) => {
+            if (err) throw err;
+            console.log("Table created: test_groups");
+          });
         });
       });
     });
