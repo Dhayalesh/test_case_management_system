@@ -18,12 +18,12 @@ const RunTestCases = () => {
         "Valid Login": {
           description: "Test with valid username and password.",
           data: "username: testuser, password: 123456",
-          script: "login('testuser', '123456');",
+          script: "script goes here",
         },
         "Invalid Login": {
           description: "Test with incorrect password.",
           data: "username: testuser, password: wrongpass",
-          script: "login('testuser', 'wrongpass');",
+          script: "script goes here",
         },
       },
     },
@@ -33,7 +33,7 @@ const RunTestCases = () => {
         "Valid Signup": {
           description: "Register with valid user info.",
           data: "username: newuser, password: pass123",
-          script: "signup('newuser', 'pass123');",
+          script: "script goes here",
         },
       },
     },
@@ -146,9 +146,12 @@ const RunTestCases = () => {
           <p>
             <strong>Test Script:</strong>
           </p>
-          <div className={styles.scriptBox}>
-            {testGroups[selectedGroup].cases[selectedCase].script}
-          </div>
+          <textarea
+            className={styles.scriptBox}
+            value={testGroups[selectedGroup].cases[selectedCase].script}
+            readOnly
+          ></textarea>
+
           <button
             type="button"
             onClick={handleCopy}
