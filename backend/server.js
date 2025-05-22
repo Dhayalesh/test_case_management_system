@@ -5,16 +5,24 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
 
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
+// Routes
 const authRoutes = require("./routes/authRoutes");
-app.use("/", authRoutes);  // POST /login
-
 const testGroupRoutes = require("./routes/testGroupRoutes");
+const testCaseDetailsRoutes = require("./routes/testCaseDetailsRoutes");
+
+app.use("/", authRoutes);
 app.use("/", testGroupRoutes);
+app.use("/", testCaseDetailsRoutes);
 
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
 
-app.listen(5000, "0.0.0.0", () => {
-  console.log(`✅ Server is running at http://localhost:5000`);
+// Start server
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server is running at http://localhost:${PORT}`);
 });
