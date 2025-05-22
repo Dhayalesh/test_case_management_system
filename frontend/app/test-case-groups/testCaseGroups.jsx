@@ -21,7 +21,7 @@ export default function TestCaseGroups() {
 
   const fetchGroups = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/test-case-group-fetch");
+      const res = await axios.get("http://51.20.12.147/test-case-group-fetch");
       const mappedGroups = res.data.map((g) => ({
         ...g,
         _id: g._id || g.id,
@@ -47,11 +47,11 @@ export default function TestCaseGroups() {
     try {
       if (editId) {
         await axios.put(
-          `http://localhost:5000/test-case-group-update/${editId}`,
+          `http://51.20.12.147/test-case-group-update/${editId}`,
           payload
         );
       } else {
-        await axios.post("http://localhost:5000/test-case-group-add", payload);
+        await axios.post("http://51.20.12.147/test-case-group-add", payload);
       }
       fetchGroups();
       setNewGroupName("");
@@ -70,7 +70,7 @@ export default function TestCaseGroups() {
     }
     try {
       const res = await axios.get(
-        `http://localhost:5000/test-case-group-soloFetch/${id}`
+        `http://51.20.12.147/test-case-group-soloFetch/${id}`
       );
       setNewGroupName(res.data.name);
       setNewGroupDesc(res.data.description);
@@ -88,7 +88,7 @@ export default function TestCaseGroups() {
     }
     try {
       const res = await axios.delete(
-        `http://localhost:5000/test-case-group-delete/${id}`
+        `http://51.20.12.147/test-case-group-delete/${id}`
       );
       console.log(res.data.message);
       fetchGroups();
