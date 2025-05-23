@@ -57,6 +57,22 @@ db.connect((err) => {
           db.query(createTestGroupsTable, (err) => {
             if (err) throw err;
             console.log("Table created: test_groups");
+
+            // **Create test_execution table if not exists**
+            const createTestExecutionTable = `
+              CREATE TABLE IF NOT EXISTS test_execution (
+                id INT PRIMARY KEY AUTO_INCREMENT,
+                date_executed DATE,
+                group_name VARCHAR(100),
+                test_case VARCHAR(100),
+                test_result TEXT,
+                status VARCHAR(50)
+              )
+            `;
+            db.query(createTestExecutionTable, (err) => {
+              if (err) throw err;
+              console.log("Table created: test_execution");
+            });
           });
         });
       });
