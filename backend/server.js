@@ -13,10 +13,12 @@ app.use(bodyParser.json());
 const authRoutes = require("./routes/authRoutes");
 const testGroupRoutes = require("./routes/testGroupRoutes");
 const testCaseDetailsRoutes = require("./routes/testCaseDetailsRoutes");
+const runTestCaseRoutes = require("./routes/runTestCaseRoutes");
 
 app.use("/", authRoutes);
 app.use("/", testGroupRoutes);
 app.use("/", testCaseDetailsRoutes);
+app.use("/", runTestCaseRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });

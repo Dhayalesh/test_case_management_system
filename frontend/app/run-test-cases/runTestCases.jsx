@@ -3,55 +3,72 @@
 import React, { useState, useEffect } from "react";
 import styles from "./runTestCases.module.css";
 
+const BASE_URL = "http://localhost:5000"; // Define base API URL here
+
 const RunTestCases = () => {
+  const [testGroups, setTestGroups] = useState([]);
+  const [testCases, setTestCases] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
   const [selectedCase, setSelectedCase] = useState("");
   const [passStatus, setPassStatus] = useState("");
   const [description, setDescription] = useState("");
   const [currentDate, setCurrentDate] = useState("");
-  const [copied, setCopied] = useState(false);
-
-  const testGroups = {
-    "Login Tests": {
-      description: "Tests related to login functionality.",
-      cases: {
-        "Valid Login": {
-          description: "Test with valid username and password.",
-          data: "username: testuser, password: 123456",
-          script: "script goes here",
-        },
-        "Invalid Login": {
-          description: "Test with incorrect password.",
-          data: "username: testuser, password: wrongpass",
-          script: "script goes here",
-        },
-      },
-    },
-    "Signup Tests": {
-      description: "Tests related to user registration.",
-      cases: {
-        "Valid Signup": {
-          description: "Register with valid user info.",
-          data: "username: newuser, password: pass123",
-          script: "script goes here",
-        },
-      },
-    },
-  };
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     setCurrentDate(today);
+
+    fetch(`${BASE_URL}/test-case-group-fetch`)
+      .then((res) => res.json())
+      .then((data) => setTestGroups(data))
+      .catch((err) => console.error("Error fetching test groups:", err));
   }, []);
 
-  const handleCopy = () => {
-    const script =
-      selectedGroup && selectedCase
-        ? testGroups[selectedGroup].cases[selectedCase].script
-        : "";
-    navigator.clipboard.writeText(script);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  useEffect(() => {
+    if (selectedGroup) {
+      fetch(`${BASE_URL}/test-case-detail-fetch?groupName=${selectedGroup}`)
+        .then((res) => res.json())
+        .then((data) => setTestCases(data))
+        .catch((err) => console.error("Error fetching test cases:", err));
+    } else {
+      setTestCases([]);
+    }
+  }, [selectedGroup]);
+
+  const handleSave = async () => {
+    if (!selectedGroup || !selectedCase || !passStatus) {
+      console.error("Please select all required fields before saving.");
+      return;
+    }
+
+    const executionData = {
+      group_name: selectedGroup,
+      test_case: selectedCase,
+      test_result: description,
+      status: passStatus,
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}/test-execution-add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(executionData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2000);
+        console.log("Test execution saved successfully!");
+      } else {
+        console.error(`Error: ${result.error}`);
+      }
+    } catch (error) {
+      console.error("Error saving test execution:", error);
+    }
   };
 
   return (
@@ -68,9 +85,9 @@ const RunTestCases = () => {
           }}
         >
           <option value="">-- Select Group --</option>
-          {Object.keys(testGroups).map((group, idx) => (
-            <option key={idx} value={group}>
-              {group}
+          {testGroups.map((group) => (
+            <option key={group.id} value={group.name}>
+              {group.name}
             </option>
           ))}
         </select>
@@ -84,9 +101,9 @@ const RunTestCases = () => {
             onChange={(e) => setSelectedCase(e.target.value)}
           >
             <option value="">-- Select Test Case --</option>
-            {Object.keys(testGroups[selectedGroup].cases).map((test, idx) => (
-              <option key={idx} value={test}>
-                {test}
+            {testCases.map((test) => (
+              <option key={test._id} value={test.name}>
+                {test.name}
               </option>
             ))}
           </select>
@@ -129,37 +146,37 @@ const RunTestCases = () => {
         <input type="date" value={currentDate} readOnly />
       </div>
 
-      {selectedGroup && selectedCase && (
+      {selectedCase && (
         <div className={styles.infoBox}>
           <p>
-            <strong>Group Description:</strong>{" "}
-            {testGroups[selectedGroup].description}
-          </p>
-          <p>
             <strong>Case Description:</strong>{" "}
-            {testGroups[selectedGroup].cases[selectedCase].description}
+            {testCases.find((tc) => tc.name === selectedCase)?.description ||
+              "No description"}
           </p>
           <p>
             <strong>Test Data:</strong>{" "}
-            {testGroups[selectedGroup].cases[selectedCase].data}
+            {testCases.find((tc) => tc.name === selectedCase)?.data ||
+              "No data"}
           </p>
           <p>
             <strong>Test Script:</strong>
           </p>
           <textarea
             className={styles.scriptBox}
-            value={testGroups[selectedGroup].cases[selectedCase].script}
+            value={
+              testCases.find((tc) => tc.name === selectedCase)?.script || ""
+            }
             readOnly
           ></textarea>
 
           <button
             type="button"
-            onClick={handleCopy}
+            onClick={handleSave}
             className={styles.copyButton}
           >
-            Copy Script
+            Save
           </button>
-          {copied && <div className={styles.copySuccess}>Copied!</div>}
+          {saved && <div className={styles.copySuccess}>Saved!</div>}
         </div>
       )}
     </div>
