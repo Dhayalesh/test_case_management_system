@@ -71,7 +71,7 @@ const RunTestCases = () => {
         setSaved(true);
         setTimeout(() => {
           resetForm();
-        }, 2000);
+        }, 500);
         console.log("Test execution saved successfully!");
       } else {
         console.error(`Error: ${result.error}`);
