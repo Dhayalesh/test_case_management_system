@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./testResults.module.css";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://51.20.12.147";
 
 const TestResults = () => {
   const [sortBy, setSortBy] = useState("");
