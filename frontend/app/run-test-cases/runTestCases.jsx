@@ -36,6 +36,14 @@ const RunTestCases = () => {
     }
   }, [selectedGroup]);
 
+  const resetForm = () => {
+    setSelectedGroup("");
+    setSelectedCase("");
+    setPassStatus("");
+    setDescription("");
+    setSaved(false);
+  };
+
   const handleSave = async () => {
     if (!selectedGroup || !selectedCase || !passStatus) {
       console.error("Please select all required fields before saving.");
@@ -61,7 +69,9 @@ const RunTestCases = () => {
       const result = await response.json();
       if (response.ok) {
         setSaved(true);
-        setTimeout(() => setSaved(false), 2000);
+        setTimeout(() => {
+          resetForm();
+        }, 2000);
         console.log("Test execution saved successfully!");
       } else {
         console.error(`Error: ${result.error}`);
