@@ -13,7 +13,7 @@ import {
   Legend,
 } from "recharts";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://51.20.12.147:5000";
 
 export default function Dashboard() {
   const [chartData, setChartData] = useState([]);
