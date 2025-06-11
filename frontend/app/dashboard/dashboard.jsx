@@ -12,8 +12,9 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import API_URL from '../api/api.json';
 
-const BASE_URL = "http://51.20.12.147:5000";
+const BASE_URL = API_URL.BASE_URL;
 
 export default function Dashboard() {
   const [chartData, setChartData] = useState([]);

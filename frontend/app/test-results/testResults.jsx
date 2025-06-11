@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./testResults.module.css";
+import API_URL from "../api/api.json";
 
-const BASE_URL = "http://51.20.12.147";
+const BASE_URL = API_URL.BASE_URL;
 
 const TestResults = () => {
   const [sortBy, setSortBy] = useState("");

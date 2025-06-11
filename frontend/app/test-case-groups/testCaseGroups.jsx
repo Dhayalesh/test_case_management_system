@@ -6,7 +6,10 @@ import deleteIcon from "../../public/images/delete.png";
 import editIcon from "../../public/images/edit.png";
 import Image from "next/image";
 import axios from "axios";
-import TestCaseDetails from "../test-case-details/testCaseDetails"; // import component
+import TestCaseDetails from "../test-case-details/testCaseDetails";
+import API_URL from "../api/api.json";
+
+const BASE_URL = API_URL.BASE_URL;
 
 export default function TestCaseGroups() {
   // state as before
@@ -21,7 +24,7 @@ export default function TestCaseGroups() {
 
   const fetchGroups = async () => {
     try {
-      const res = await axios.get("http://51.20.12.147/test-case-group-fetch");
+      const res = await axios.get(`${BASE_URL}/test-case-group-fetch`);
       const mappedGroups = res.data.map((g) => ({
         ...g,
         _id: g._id || g.id,

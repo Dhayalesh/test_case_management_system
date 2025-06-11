@@ -6,8 +6,9 @@ import styles from "./testCaseDetails.module.css";
 import deleteIcon from "../../public/images/delete.png";
 import editIcon from "../../public/images/edit.png";
 import Image from "next/image";
+import API_URL from "../api/api.json";
 
-const BASE_URL = "http://51.20.12.147";
+const BASE_URL = API_URL.BASE_URL;
 
 export default function TestCaseDetails({ groupName, groupId, onBack }) {
   const [testCases, setTestCases] = useState([]);

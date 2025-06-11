@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
 import axios from "axios";
+import API_URL from '../api/api.json'
+
+const BASE_URL = API_URL.BASE_URL;
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -30,7 +33,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("http://51.20.12.147/login", {
+      const response = await axios.post(`${BASE_URL}/login`, {
         email,
         password,
       });
