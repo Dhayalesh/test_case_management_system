@@ -50,11 +50,11 @@ export default function TestCaseGroups() {
     try {
       if (editId) {
         await axios.put(
-          `http://51.20.12.147/test-case-group-update/${editId}`,
+          `${BASE_URL}/test-case-group-update/${editId}`,
           payload
         );
       } else {
-        await axios.post("http://51.20.12.147/test-case-group-add", payload);
+        await axios.post(`${BASE_URL}/test-case-group-add`, payload);
       }
       fetchGroups();
       setNewGroupName("");
@@ -73,7 +73,7 @@ export default function TestCaseGroups() {
     }
     try {
       const res = await axios.get(
-        `http://51.20.12.147/test-case-group-soloFetch/${id}`
+        `${BASE_URL}/test-case-group-soloFetch/${id}`
       );
       setNewGroupName(res.data.name);
       setNewGroupDesc(res.data.description);
@@ -91,7 +91,7 @@ export default function TestCaseGroups() {
     }
     try {
       const res = await axios.delete(
-        `http://51.20.12.147/test-case-group-delete/${id}`
+        `${BASE_URL}/test-case-group-delete/${id}`
       );
       console.log(res.data.message);
       fetchGroups();
